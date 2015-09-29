@@ -43,7 +43,8 @@ function cleanUp(data){
   var leakyIndex = leakyData.indexOf(data);
   var nonLeakyIndex = nonLeakyData.indexOf(data);
 
-  leakyData.splice(leakyIndex, 1);
+  // Make it leak
+  // leakyData.splice(leakyIndex, 1);
   nonLeakyData.splice(nonLeakyIndex, 1);
 
 }
