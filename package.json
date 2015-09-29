@@ -1,0 +1,15 @@
+{
+  "name": "memory-leak-example",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node --expose-gc index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Kras",
+  "license": "ISC",
+  "dependencies": {
+    "heapdump": "^0.3.7"
+  }
+}
