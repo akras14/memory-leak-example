@@ -1,3 +1,4 @@
+require('heapdump');
 var leakyData = [];
 var nonLeakyData = [];
 
@@ -25,6 +26,16 @@ setInterval(function logHeapData(){
   var heapUsed = process.memoryUsage().heapUsed;
   console.log("Programm is using " + heapUsed + " bytes of Heap.")
 }, 1000);
+
+// Periodically get a heap dump
+setInterval(getHeapDump, 20000);
+
+//Get the initial heap dump
+getHeapDump();
+
+function getHeapDump(){
+  process.kill(process.pid, 'SIGUSR2');
+}
 
 // Store the data
 function addData(data){
