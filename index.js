@@ -2,13 +2,19 @@ require('heapdump');
 var leakyData = [];
 var nonLeakyData = [];
 
+
+function SimpleClass(text){
+  this.text = text;
+}
+
 // Simulate App usage
 setInterval(function simulateAppUsage(){
-  //1. Get a random string
+  //1. Get a random class
   var randomData = Math.random().toString();
+  var storeMe = new SimpleClass(randomData);
 
   //2. Save the data
-  addData(randomData);
+  addData(storeMe);
 }, 5);
 
 // Log Heap Statistics
