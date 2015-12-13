@@ -4,6 +4,9 @@ require('heapdump');
 var leakyData = [];
 var nonLeakyData = [];
 
+var fs = require('fs');
+var stats = [];
+
 class SimpleClass {
   constructor(text){
     this.text = text;
@@ -37,6 +40,7 @@ function generateHeapDumpAndStats(){
 
   //2. Output Heap stats
   var heapUsed = process.memoryUsage().heapUsed;
+  stats.push(heapUsed);
   console.log("Program is using " + heapUsed + " bytes of Heap.")
 
   //3. Get Heap dump
@@ -46,3 +50,16 @@ function generateHeapDumpAndStats(){
 //Kick off the program
 setInterval(getAndStoreRandomData, 5); //Add random data every 5 milliseconds
 setInterval(generateHeapDumpAndStats, 2000); //Do garbage collection and heap dump every 2 seconds
+
+//On ctrl+c save the stats and exit
+process.on('SIGINT', function(){
+  var data = JSON.stringify(stats);
+  fs.writeFile("stats.json", data, function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log("\nSaved stats to stats.json");
+    }
+    process.exit();
+  });
+});

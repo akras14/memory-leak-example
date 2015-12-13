@@ -1,23 +1,13 @@
+#!/usr/bin/env python
+
 import matplotlib.pyplot as plt
-plt.plot([3742880,
-    3854592,
-    3756072,
-    3756264,
-    3756288,
-    3756312,
-    3756336,
-    3756360,
-    3756648,
-    3756672,
-    3756696,
-    3751232,
-    3751232,
-    3751232,
-    3751232,
-    3751232,
-    3751232,
-    3751232,
-    3751232,
-    3751232])
-plt.ylabel('some numbers')
+import json
+
+statsFile = open('stats.json', 'r')
+heapSizes = json.load(statsFile)
+
+print('Plotting %s' % ', '.join(map(str, heapSizes)))
+
+plt.plot(heapSizes)
+plt.ylabel('Heap Size')
 plt.show()
